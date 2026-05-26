@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/links")
 @RequiredArgsConstructor
@@ -23,6 +25,14 @@ public class LinkController {
     ){
         LinkResponseDTO response = service.save(request, user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<LinkResponseDTO>> getAllByUser(
+            @AuthenticationPrincipal CustomUserDetails user
+    ){
+        List<LinkResponseDTO> links = service.findAllByUser(user.getId());
+        return ResponseEntity.ok(links);
     }
 
     @DeleteMapping("/{linkId}")
