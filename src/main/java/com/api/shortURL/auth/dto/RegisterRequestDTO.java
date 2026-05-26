@@ -1,4 +1,16 @@
 package com.api.shortURL.auth.dto;
 
-public class RegisterRequestDTO {
-}
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public record RegisterRequestDTO(
+        @NotBlank
+        String name,
+
+        @NotBlank
+        @Email
+        String email,
+
+        @NotBlank
+        String password
+){}
