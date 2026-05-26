@@ -30,6 +30,10 @@ public class UserService {
         );
     }
 
+    public UserEntity findEntity(Integer id){
+        return getActiveUserOrThrow(id);
+    }
+
     public UserResponseDTO save(UserRequestDTO request){
         this.assertEmailNotInUse(request.email());
 
@@ -40,8 +44,7 @@ public class UserService {
     };
 
     public UserResponseDTO find(Integer id){
-        UserEntity user = getActiveUserOrThrow(id);
-
+        UserEntity user = findEntity(id);
         return mapper.toUserResponseDTO(user);
     }
 }
