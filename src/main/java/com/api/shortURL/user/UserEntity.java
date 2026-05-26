@@ -1,11 +1,13 @@
 package com.api.shortURL.user;
 
+import com.api.shortURL.link.LinkEntity;
 import com.api.shortURL.plans.enums.PlanType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -36,6 +38,9 @@ public class UserEntity {
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LinkEntity> links;
 
     @PrePersist
     protected void onCreate(){
