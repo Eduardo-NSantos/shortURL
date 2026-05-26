@@ -13,26 +13,26 @@ import java.time.LocalDateTime;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
     @Column(nullable = false)
-    String name;
+    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
-    String email;
+    private String password;
+
+    private Integer planId; // temporário
 
     @Column(nullable = false)
-    String password;
-
-    Integer planId; // temporário
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
-    LocalDateTime updatedAt;
-
-    LocalDateTime deletedAt;
+    private LocalDateTime deletedAt;
 
     @PrePersist
     protected void onCreate(){
