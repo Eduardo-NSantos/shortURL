@@ -8,13 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/link")
+@RequestMapping("/links")
 @RequiredArgsConstructor
 public class LinkController {
     private final LinkService service;
@@ -26,5 +23,14 @@ public class LinkController {
     ){
         LinkResponseDTO response = service.save(request, user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @DeleteMapping("/{linkId}")
+    public ResponseEntity<Void> delete(
+            @PathVariable Integer linkId,
+            @AuthenticationPrincipal CustomUserDetails user
+    ){
+        service.delete(linkId, user.getId());
+        return ResponseEntity.noContent().build();
     }
 }

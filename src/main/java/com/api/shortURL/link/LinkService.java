@@ -7,7 +7,10 @@ import com.api.shortURL.link.util.ShortCodeGenerator;
 import com.api.shortURL.user.UserEntity;
 import com.api.shortURL.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
@@ -24,5 +27,17 @@ public class LinkService {
         LinkEntity saved = repository.save(link);
 
         return mapper.toResponseDTO(saved);
+    }
+
+    @Transactional
+    public void delete(Integer linkId, Integer userId){
+        LinkEntity link = repository.findByIdAndUserId(linkId, userId).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Link not found"
+                )
+        );
+
+        repository.delete(link);
     }
 }
