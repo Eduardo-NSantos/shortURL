@@ -1,5 +1,6 @@
-package com.api.shortURL.link;
+package com.api.shortURL.link.controller;
 
+import com.api.shortURL.link.LinkService;
 import com.api.shortURL.link.dto.LinkRequestDTO;
 import com.api.shortURL.link.dto.LinkResponseDTO;
 import com.api.shortURL.secutiry.CustomUserDetails;

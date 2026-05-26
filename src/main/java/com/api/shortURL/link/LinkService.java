@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class LinkService {
@@ -27,6 +29,12 @@ public class LinkService {
         LinkEntity saved = repository.save(link);
 
         return mapper.toResponseDTO(saved);
+    }
+
+    public List<LinkResponseDTO> findAllByUser(Integer userId){
+        return repository.findByUserId(userId).stream()
+                .map(mapper::toResponseDTO)
+                .toList();
     }
 
     @Transactional

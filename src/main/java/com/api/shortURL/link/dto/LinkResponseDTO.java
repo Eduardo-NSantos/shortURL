@@ -13,6 +13,9 @@ public record LinkResponseDTO (
     @NotBlank
     String shortCode,
 
+    @NotBlank
+    String redirectUrl,
+
     @NotNull
     Integer userId
 )
