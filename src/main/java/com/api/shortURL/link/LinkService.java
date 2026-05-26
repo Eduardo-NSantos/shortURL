@@ -48,4 +48,16 @@ public class LinkService {
 
         repository.delete(link);
     }
+
+    public String getOriginalUrl(String shortCode){
+        if (!repository.existsByShortCode(shortCode)){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Link not found"
+            );
+        }
+
+        LinkEntity link = repository.findByShortCode(shortCode);
+
+        return link.getOriginalURL();
+    }
 }

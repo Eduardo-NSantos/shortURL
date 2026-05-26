@@ -33,6 +33,10 @@ public class SecurityConfig {
                                 HttpMethod.POST,
                                 "/auth/login", "/auth/register"
                         ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/{shortCode}"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

@@ -9,4 +9,5 @@ public interface LinkRepository extends JpaRepository<LinkEntity, Integer> {
     boolean existsByShortCode(String shortCode);
     Optional<LinkEntity> findByIdAndUserId(Integer linkId, Integer userId);
     List<LinkEntity> findByUserId(Integer userId);
+    LinkEntity findByShortCode(String shortCode);
 }
