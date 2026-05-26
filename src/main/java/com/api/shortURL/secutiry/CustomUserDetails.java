@@ -1,0 +1,58 @@
+package com.api.shortURL.secutiry;
+
+import com.api.shortURL.user.UserEntity;
+import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+
+@RequiredArgsConstructor
+public class CustomUserDetails implements UserDetails {
+    private final UserEntity user;
+
+    @Override
+    @NullMarked
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    public Integer getId(){
+        return user.getId();
+    }
+
+    @Override
+    public @Nullable String getPassword() {
+        return user.getPassword();
+    }
+
+    @Override
+    @NullMarked
+    public String getUsername() {
+        return user.getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
+}
