@@ -22,6 +22,14 @@ public class UserService {
         }
     }
 
+    public void assertCpfNotInUse(String cpf){
+        if (repository.existsByCpf(cpf)){
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Cpf already in use"
+            );
+        }
+    }
+
     public UserEntity getActiveUserOrThrow(Integer id){
         return repository.findByIdAndDeletedAtIsNull(id).orElseThrow(
                 () -> new ResponseStatusException(
@@ -36,6 +44,7 @@ public class UserService {
 
     public UserResponseDTO save(UserRequestDTO request){
         this.assertEmailNotInUse(request.email());
+        this.assertCpfNotInUse(request.cpf());
 
         UserEntity user = mapper.toEntity(request);
         UserEntity saved = repository.save(user);

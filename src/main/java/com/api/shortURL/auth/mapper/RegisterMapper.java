@@ -11,6 +11,7 @@ public class RegisterMapper {
     public UserRequestDTO toUserRequestDTO(RegisterRequestDTO register){
         return new UserRequestDTO(
                 register.name(),
+                register.cpf(),
                 register.email(),
                 register.password()
         );

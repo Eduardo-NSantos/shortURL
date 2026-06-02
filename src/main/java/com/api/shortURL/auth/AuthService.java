@@ -41,8 +41,6 @@ public class AuthService {
     }
 
     public RegisterResponseDTO register(RegisterRequestDTO request){
-        userService.assertEmailNotInUse(request.email());
-
         UserRequestDTO user = mapper.toUserRequestDTO(request);
         UserResponseDTO saved = userService.save(user);
 

@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Optional<UserEntity> findByEmailAndDeletedAtIsNull(String email);
     Optional<UserEntity> findByIdAndDeletedAtIsNull(Integer id);
     boolean existsByEmail(String email);
+    boolean existsByCpf(String cpf);
 }
