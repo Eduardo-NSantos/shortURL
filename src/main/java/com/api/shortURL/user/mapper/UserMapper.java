@@ -12,6 +12,7 @@ public class UserMapper {
         UserEntity userEntity = new UserEntity();
 
         userEntity.setName(user.name());
+        userEntity.setCpf(user.cpf());
         userEntity.setEmail(user.email());
         userEntity.setPassword(
                 new BCryptPasswordEncoder().encode(user.password())
@@ -24,6 +25,7 @@ public class UserMapper {
         return new UserResponseDTO(
                 user.getId(),
                 user.getName(),
+                user.getCpf(),
                 user.getEmail(),
                 user.getCreatedAt()
         );
