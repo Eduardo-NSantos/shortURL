@@ -1,4 +1,4 @@
-package com.api.shortURL.plans.enums;
+package com.api.shortURL.user.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,29 +7,19 @@ import java.math.BigDecimal;
 
 @Getter
 @RequiredArgsConstructor
-public enum PlanType {
+public enum PlanEnum {
     FREE(
-            0,
             "FREE",
             BigDecimal.ZERO,
-            1
-    ),
-
-    SIMPLE(
-            1,
-            "SIMPLE",
-            new BigDecimal("00.05"),
-            5
+            3
     ),
 
     PRO(
-            2,
             "PRO",
-            new BigDecimal("01.00"),
-            Integer.MAX_VALUE
+            new BigDecimal("05.00"),
+            null
     );
 
-    private final Integer id;
     private final String name;
     private final BigDecimal price;
     private final Integer maxLinks;

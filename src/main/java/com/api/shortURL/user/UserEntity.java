@@ -1,7 +1,6 @@
 package com.api.shortURL.user;
 
 import com.api.shortURL.link.LinkEntity;
-import com.api.shortURL.plans.enums.PlanType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,10 +30,6 @@ public class UserEntity {
     private String password;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private PlanType plan;
-
-    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -49,10 +44,6 @@ public class UserEntity {
     protected void onCreate(){
         this.createdAt = LocalDateTime.now();
         this.updatedAt = this.createdAt;
-
-        if (this.plan == null){
-            this.plan = PlanType.FREE;
-        }
     }
 
     @PreUpdate
