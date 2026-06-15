@@ -1,4 +1,4 @@
-package com.api.shortURL.user.enums;
+package com.api.shortURL.subscription.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
