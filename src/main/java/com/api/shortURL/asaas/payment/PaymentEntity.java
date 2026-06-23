@@ -1,6 +1,6 @@
-package com.api.shortURL.payment;
+package com.api.shortURL.asaas.payment;
 
-import com.api.shortURL.payment.enums.PaymentStatusEnum;
+import com.api.shortURL.asaas.payment.enums.PaymentStatusEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,8 +34,7 @@ public class PaymentEntity {
     @Column(nullable = false)
     private String billingType;
 
-    private String pixEncodedImage;
-
+    @Column(columnDefinition = "TEXT")
     private String pixPayload;
 
     private LocalDateTime createdAt;

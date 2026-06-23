@@ -1,6 +1,9 @@
-package com.api.shortURL.payment;
+package com.api.shortURL.asaas.payment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface PaymentRepository extends JpaRepository<PaymentEntity, Integer> {
+    Optional<PaymentEntity> findByAsaasPaymentId(String asaasPaymentId);
 }
