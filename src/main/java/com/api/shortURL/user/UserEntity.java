@@ -29,6 +29,9 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(unique = true)
+    private String asaasCustomerId;
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
