@@ -1,4 +1,4 @@
-package com.api.shortURL.payment.customer.dto;
+package com.api.shortURL.asaas.customer.dto;
 
 public record CreateCustomerResponse(
         String id,

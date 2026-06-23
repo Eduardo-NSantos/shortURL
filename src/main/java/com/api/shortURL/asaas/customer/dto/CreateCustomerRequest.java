@@ -1,4 +1,4 @@
-package com.api.shortURL.payment.customer.dto;
+package com.api.shortURL.asaas.customer.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
