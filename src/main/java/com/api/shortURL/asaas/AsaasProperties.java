@@ -1,4 +1,4 @@
-package com.api.shortURL.payment;
+package com.api.shortURL.asaas;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

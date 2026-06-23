@@ -1,9 +1,11 @@
-package com.api.shortURL.payment.client;
+package com.api.shortURL.asaas.client;
 
-import com.api.shortURL.payment.AsaasProperties;
-import com.api.shortURL.payment.customer.dto.CreateCustomerRequest;
-import com.api.shortURL.payment.customer.dto.CreateCustomerResponse;
-import com.api.shortURL.payment.dto.*;
+import com.api.shortURL.asaas.AsaasProperties;
+import com.api.shortURL.asaas.customer.dto.CreateCustomerRequest;
+import com.api.shortURL.asaas.customer.dto.CreateCustomerResponse;
+import com.api.shortURL.asaas.payment.dto.CreatePaymentRequest;
+import com.api.shortURL.asaas.payment.dto.CreatePaymentResponse;
+import com.api.shortURL.asaas.payment.dto.PixQrCodeResponse;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -41,7 +43,7 @@ public class AsaasClient {
 
     public PixQrCodeResponse getPixQrCode(String paymentId){
         return restClient.get()
-                .uri("payments/{id}/pixQrCode", paymentId)
+                .uri("/payments/{id}/pixQrCode", paymentId)
                 .retrieve()
                 .body(PixQrCodeResponse.class);
     }
