@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
                                 HttpMethod.POST,
-                                "/auth/login", "/auth/register"
+                                "/auth/login", "/auth/register", "/webhooks/asaas"
                         ).permitAll()
                         .requestMatchers(
                                 HttpMethod.GET,
