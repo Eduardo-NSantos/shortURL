@@ -1,4 +1,4 @@
-package com.api.shortURL.payment.enums;
+package com.api.shortURL.asaas.payment.enums;
 
 public enum BillingTypeEnum {
     PIX

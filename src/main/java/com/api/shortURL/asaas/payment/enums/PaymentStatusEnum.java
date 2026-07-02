@@ -1,9 +1,10 @@
-package com.api.shortURL.payment.enums;
+package com.api.shortURL.asaas.payment.enums;
 
 public enum PaymentStatusEnum {
     PENDING,
     RECEIVED,
     OVERDUE,
     REFUNDED,
-    CANCELLED
+    CANCELLED,
+    CONFIRMED
 }

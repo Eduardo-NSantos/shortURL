@@ -1,6 +1,6 @@
-package com.api.shortURL.payment.dto;
+package com.api.shortURL.asaas.payment.dto;
 
-import com.api.shortURL.payment.enums.BillingTypeEnum;
+import com.api.shortURL.asaas.payment.enums.BillingTypeEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public record CreatePaymentRequest(
         @NotBlank
-        String customerId,
+        String customer,
 
         @NotNull
         BigDecimal value,

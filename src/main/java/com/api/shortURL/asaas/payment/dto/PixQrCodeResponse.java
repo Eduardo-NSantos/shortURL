@@ -1,7 +1,6 @@
-package com.api.shortURL.payment.dto;
+package com.api.shortURL.asaas.payment.dto;
 
 public record PixQrCodeResponse(
-        String encodedImage,
         String payload
 )
 {}
