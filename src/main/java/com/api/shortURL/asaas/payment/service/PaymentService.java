@@ -1,13 +1,13 @@
-package com.api.shortURL.payment.service;
+package com.api.shortURL.asaas.payment.service;
 
-import com.api.shortURL.payment.PaymentEntity;
-import com.api.shortURL.payment.PaymentRepository;
-import com.api.shortURL.payment.client.AsaasClient;
-import com.api.shortURL.payment.customer.service.CustomerService;
-import com.api.shortURL.payment.dto.CreatePaymentRequest;
-import com.api.shortURL.payment.dto.CreatePaymentResponse;
-import com.api.shortURL.payment.dto.PixQrCodeResponse;
-import com.api.shortURL.payment.enums.BillingTypeEnum;
+import com.api.shortURL.asaas.payment.PaymentEntity;
+import com.api.shortURL.asaas.payment.PaymentRepository;
+import com.api.shortURL.asaas.client.AsaasClient;
+import com.api.shortURL.asaas.customer.service.CustomerService;
+import com.api.shortURL.asaas.payment.dto.CreatePaymentRequest;
+import com.api.shortURL.asaas.payment.dto.CreatePaymentResponse;
+import com.api.shortURL.asaas.payment.dto.PixQrCodeResponse;
+import com.api.shortURL.asaas.payment.enums.BillingTypeEnum;
 import com.api.shortURL.user.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,24 @@ public class PaymentService {
                 )
         );
 
+//        Tempoorário (espera o asaas criar a cobrança antes de pedir o qrCode)
+        for (int i = 0; i < 5; i++) {
+            try {
+                PixQrCodeResponse qrCodeResponse =
+                        asaasClient.getPixQrCode(response.id());
+
+                if (qrCodeResponse != null && qrCodeResponse.payload() != null) {
+                    break;
+                }
+
+                Thread.sleep(1000);
+
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+
         PixQrCodeResponse qrCodeResponse = asaasClient.getPixQrCode(response.id());
 
         PaymentEntity payment = new PaymentEntity();
@@ -42,7 +60,6 @@ public class PaymentService {
         payment.setStatus(response.status());
         payment.setDueDate(response.dueDate());
         payment.setBillingType("PIX");
-        payment.setPixEncodedImage(qrCodeResponse.encodedImage());
         payment.setPixPayload(qrCodeResponse.payload());
 
         return paymentRepository.save(payment);
