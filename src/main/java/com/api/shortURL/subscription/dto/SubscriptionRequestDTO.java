@@ -1,7 +1,6 @@
 package com.api.shortURL.subscription.dto;
 
 import com.api.shortURL.subscription.enums.PlanEnum;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record SubscriptionRequestDTO(
@@ -9,9 +8,6 @@ public record SubscriptionRequestDTO(
         Integer userId,
 
         @NotNull
-        PlanEnum plan,
-
-        @NotBlank
-        String gateway_subscription_id
+        PlanEnum plan
 )
 {}

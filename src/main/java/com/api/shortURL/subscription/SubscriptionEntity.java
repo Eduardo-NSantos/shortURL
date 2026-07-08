@@ -1,5 +1,6 @@
 package com.api.shortURL.subscription;
 
+import com.api.shortURL.asaas.payment.PaymentEntity;
 import com.api.shortURL.subscription.enums.SubscriptionStatus;
 import com.api.shortURL.subscription.enums.PlanEnum;
 import com.api.shortURL.user.UserEntity;
@@ -10,6 +11,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "subscriptions")
 @Getter
 @Setter
 public class SubscriptionEntity {
@@ -29,8 +31,9 @@ public class SubscriptionEntity {
     @Enumerated(EnumType.STRING)
     private SubscriptionStatus status;
 
-    @Column(nullable = false)
-    private String gateway_subscription_id;
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private PaymentEntity payment;
 
-    private LocalDateTime expires_at;
+    private LocalDateTime expiresAt;
 }
