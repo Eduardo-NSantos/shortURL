@@ -4,6 +4,8 @@ import com.api.shortURL.link.dto.LinkRequestDTO;
 import com.api.shortURL.link.dto.LinkResponseDTO;
 import com.api.shortURL.link.mapper.LinkMapper;
 import com.api.shortURL.link.util.ShortCodeGenerator;
+import com.api.shortURL.subscription.SubscriptionService;
+import com.api.shortURL.subscription.enums.PlanEnum;
 import com.api.shortURL.user.UserEntity;
 import com.api.shortURL.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +20,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LinkService {
     private final LinkRepository repository;
+    private final SubscriptionService subscriptionService;
     private final LinkMapper mapper;
     private final UserService userService;
     private final ShortCodeGenerator shortCodeGenerator;
 
     public LinkResponseDTO save(LinkRequestDTO request, Integer userId){
         UserEntity user = userService.findEntity(userId);
+        PlanEnum userPlan = subscriptionService.getPlan(userId);
+
+        if (repository.countByUserId(userId) >= userPlan.getMaxLinks()){
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Link limit reached for your plan"
+            );
+        }
 
         LinkEntity link = mapper.toEntity(request, user, shortCodeGenerator.generateUniqueShortCode());
         LinkEntity saved = repository.save(link);

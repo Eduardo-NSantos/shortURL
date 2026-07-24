@@ -3,6 +3,7 @@ package com.api.shortURL.subscription;
 import com.api.shortURL.asaas.payment.PaymentEntity;
 import com.api.shortURL.asaas.payment.service.PaymentService;
 import com.api.shortURL.subscription.dto.SubscriptionRequestDTO;
+import com.api.shortURL.subscription.enums.PlanEnum;
 import com.api.shortURL.subscription.enums.SubscriptionStatus;
 import com.api.shortURL.subscription.mapper.SubscriptionMapper;
 import com.api.shortURL.user.UserEntity;
@@ -47,5 +48,12 @@ public class SubscriptionService {
         repository.save(subscription);
 
         return payment;
+    }
+
+    public PlanEnum getPlan(Integer userId){
+        return repository.findByUserId(userId)
+                .filter(subscription -> subscription.getStatus() == SubscriptionStatus.ACTIVE)
+                .map(SubscriptionEntity::getPlan)
+                .orElse(PlanEnum.FREE);
     }
 }

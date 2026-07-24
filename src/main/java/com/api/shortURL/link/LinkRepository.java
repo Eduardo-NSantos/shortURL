@@ -10,4 +10,5 @@ public interface LinkRepository extends JpaRepository<LinkEntity, Integer> {
     Optional<LinkEntity> findByIdAndUserId(Integer linkId, Integer userId);
     List<LinkEntity> findByUserId(Integer userId);
     LinkEntity findByShortCode(String shortCode);
+    Integer countByUserId(Integer userId);
 }

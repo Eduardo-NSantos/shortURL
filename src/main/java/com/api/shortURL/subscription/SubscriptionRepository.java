@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface SubscriptionRepository extends JpaRepository<SubscriptionEntity, Integer> {
     boolean existsByUserId(Integer userId);
+    Optional<SubscriptionEntity> findByUserId(Integer userId);
     Optional<SubscriptionEntity> findByPayment(PaymentEntity payment);
 }

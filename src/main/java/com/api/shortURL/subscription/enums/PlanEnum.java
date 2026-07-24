@@ -17,7 +17,7 @@ public enum PlanEnum {
     PRO(
             "PRO",
             new BigDecimal("05.00"),
-            null
+            Integer.MAX_VALUE
     );
 
     private final String name;
